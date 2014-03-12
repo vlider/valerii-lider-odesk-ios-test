@@ -8,9 +8,6 @@
 #import "SomeClass.h"
 #import "CoreDataHelpers.h"
 
-#import "ModelsEntity.h"
-#import "OwnerEntity.h"
-
 @interface ViewController ()
 
 @end
@@ -43,9 +40,9 @@
 }
 
 - (IBAction)secondBug:(id)sender {
-	__block NSInteger x = 123;
+	NSInteger x = 123;
 	void (^printX)() = ^() {
-		NSLog(@"%li", (long)x);
+		NSLog(@"%i", x);
 	};
 	x++;
 	printX();
@@ -61,9 +58,9 @@
 	static NSInteger count = 1;
 	if (count>1) {
 		[CoreDataHelpers cleanData];
-        [CoreDataHelpers fillUnsortedData];
 	}
 	
+	[CoreDataHelpers fillUnsortedData];
 	NSArray *models = [CoreDataHelpers arrayForFetchRequestWithName:@"AllModels"];
 	NSLog(@"%@", models);
 	
@@ -73,16 +70,6 @@
 - (IBAction)fifthBug:(id)sender {
 	[CoreDataHelpers fillUnsortedData];
 	NSArray *models = [CoreDataHelpers arrayForFetchRequestWithName:@"AllModels"];
-    models = [models sortedArrayUsingComparator:^NSComparisonResult(ModelsEntity *obj1, ModelsEntity *obj2) {
-        
-        NSComparisonResult result = [obj1.modelName compare:obj2.modelName];
-        if (NSOrderedSame == result) {
-            result = [obj1.owner.ownerName compare:obj2.owner.ownerName];
-        }
-        
-        return result;
-    }];
-    
 	NSLog(@"%@", models);
 }
 

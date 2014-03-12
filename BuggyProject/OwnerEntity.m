@@ -13,9 +13,4 @@
 @dynamic ownerName;
 @dynamic models;
 
-- (NSString *)description
-{
-    return self.ownerName;
-}
-
 @end

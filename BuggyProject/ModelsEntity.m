@@ -14,9 +14,4 @@
 @dynamic modelId;
 @dynamic owner;
 
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"%@; %@", self.owner, self.modelName];
-}
-
 @end
